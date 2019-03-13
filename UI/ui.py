@@ -13,11 +13,29 @@ sys_title = Label(window, text = '智能写作辅助系统', font = ('宋体', 2
 sys_title.pack(side = 'top')
 
 #title
-art_t_l = Label(window, text = '标题：', font = ('宋体', 13, 'bold')).place(x = 10, y = 50)
-art_t_e = Entry(window, width = 50, font = ('宋体', 13, 'bold')).place(x = 10, y = 70)            #使用show = 'none'会有不正常显示
+v1 = StringVar()
+title_l = Label(window, text = '标题：', font = ('宋体', 13, 'bold')).place(x = 9, y = 40)
+title_e = Entry(window, width = 60, textvariable = v1, font = ('宋体', 13, 'bold')).place(x = 10, y = 60)            #使用show = 'none'会有不正常显示
 
-#content
-art_c_l = Label(window, text = '正文：', font = ('宋体', 13, 'bold')).place(x = 10, y = 100)
-art_c_t = scrolledtext.ScrolledText(window, font = ('宋体', 13, 'bold'), width = 50, height = 35).place(x = 10, y = 120)      # 滑动文本框
+#标题
+v2 = StringVar()
+txt_l = Label(window, text = '正文：', font = ('宋体', 13, 'bold')).place(x = 9, y = 84)
+#放弃使用scrolledtext因为无法直接获取文本
+txt_t = scrolledtext.ScrolledText(window, width = 60, height = 39, font = ('宋体', 13, 'bold'))     # 滑动文本框
+txt_t.pack(side = LEFT, padx = 10, pady = 72)
+
+def title_error():
+    if v1.get() != '':
+        print(v1.get())
+
+title_b = Button(window, text = '标题纠错', width = 15, height = 2, command = title_error)
+title_b.pack(side = RIGHT)
+
+def txt_error():
+    txt = txt_t.get('1.0', END)
+    print(txt)
+
+txt_b = Button(window, text = '文章纠错', width = 15, height = 2, command = txt_error)
+txt_b.pack(side = RIGHT)
 
 mainloop()
